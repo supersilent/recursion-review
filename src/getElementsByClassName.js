@@ -10,19 +10,20 @@ var getElementsByClassName = function(className) {
   let currentNode = document.body;
   // your code here
   let addElements = function (node) {
-    if (node.classList.contains(className)) {
+    if (node.classList && node.classList.contains(className)) {
       ElementArr.push(node);
+    }
+    
+    if (node.childNodes) {
+      for (let e of node.childNodes) {
+        addElements(e);   
+      }
+    
     }
   };
   addElements(currentNode);
   
-  while (currentNode.childNodes) {
-    for (let e of currentNode.childNodes) {
-      addElements(e);
-    }
-    
-  }
+  
   return ElementArr;
-
 
 };
